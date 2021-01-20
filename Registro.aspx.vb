@@ -10,13 +10,16 @@ Partial Class Registro
         fvOretube.ChangeMode(FormViewMode.Insert)
     End Sub
 
-    Private Sub fvOretube_ItemInserted(sender As Object, e As FormViewInsertedEventArgs) Handles fvOretube.ItemInserted
+    Private Sub SPRegistroDS_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SPRegistroDS.Inserted
         Dim email As TextBox = fvOretube.FindControl("emailTextBox")
+        Dim ruta As String
+        ruta = "http://172.21.240.32/oretube/activacion.aspx?K="
+        Dim clave = e.Command.Parameters("@k").Value.ToString
 
-        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..."
+        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
 
-
-        Response.Write(EnviarEmail(email.Text, "testing", cuerpo))
+        Response.Write(cuerpo)
+        'Response.Write(EnviarEmail(email.Text, "testing", cuerpo))'
     End Sub
 
     Public Function EnviarEmail(ByVal direccion As String, ByVal asunto As String, ByVal mensaje As String, ByVal ParamArray adjuntos() As String) As Boolean 'Los ParamArray son opcionales
