@@ -11,15 +11,20 @@ Partial Class Registro
     End Sub
 
     Private Sub fvOretube_ItemInserted(sender As Object, e As FormViewInsertedEventArgs) Handles fvOretube.ItemInserted
-        Response.Write(EnviarEmail(, "confirmar Correo!", "testing"), "confirmar Correo!", "testing")
+        Dim email As TextBox = fvOretube.FindControl("emailTextBox")
+
+        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..."
+
+
+        Response.Write(EnviarEmail(email.Text, "testing", cuerpo))
     End Sub
 
     Public Function EnviarEmail(ByVal direccion As String, ByVal asunto As String, ByVal mensaje As String, ByVal ParamArray adjuntos() As String) As Boolean 'Los ParamArray son opcionales
         Dim ok As Boolean = True
         Try
-            If Not Regex.IsMatch(direccion, "^([0-9a-zA-Z]([-.\w][0-9a-zA-Z])@([0-9a-zA-Z][-\w]*[0-9a-zA-Z].)+[a-zA-Z]{2,9})$") Then Throw New System.Exception()
+            If Not Regex.IsMatch(direccion, "^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$") Then Throw New System.Exception()
 
-            Dim origen As MailAddress = New MailAddress("AwasCorreoPrueba@gmail.com", "IES Oretania - Oretube") ' La cuenta de correo no tiene porque ser la misma que la utilizada en el cliente SMTP.
+            Dim origen As MailAddress = New MailAddress("AwasCorreoPrueba@gmail.com", "Activacion de usuario para app de Libreria!") ' La cuenta de correo no tiene porque ser la misma que la utilizada en el cliente SMTP.
             Dim destino As MailAddress = New MailAddress(direccion)
 
             Dim mail As New MailMessage(origen, destino) With {.Subject = asunto, .Body = mensaje}
@@ -39,7 +44,8 @@ Partial Class Registro
             End If
 
             cliente.Send(mail)
-        Catch
+        Catch ex As Exception
+            Response.Write(ex)
             ok = False
         End Try
         Return ok
