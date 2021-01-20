@@ -6,6 +6,9 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <%-- <script src = "js/jquery-1.8.2.js" ></script>  --%>
+    <%-- <script src="js/jquery-ui.js"></script>        --%>
+    <%-- <script src = "js/llamadaAjax.js" ></script>   --%>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -16,6 +19,7 @@
                    
                 <asp:TextBox ID="usuarioTextBox" runat="server" Text='<%# Bind("login") %>' />
                 <asp:RequiredFieldValidator ID="rfvUsuario" runat="server" ControlToValidate="usuarioTextBox" ErrorMessage="Introduzca su nombre de usuario."></asp:RequiredFieldValidator>
+
 
                 <br />
                 password:
@@ -49,9 +53,10 @@
 
                 <br />
                 <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
-                
+
             </InsertItemTemplate>
         </asp:FormView>
+
         <asp:SqlDataSource ID="SPRegistroDS" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>"
             InsertCommand="userRegistro_sp" InsertCommandType="StoredProcedure">
             <InsertParameters>
