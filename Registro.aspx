@@ -68,6 +68,9 @@
                 <asp:Parameter Direction="Output" Name="k" DbType="Guid" />
             </InsertParameters>
         </asp:SqlDataSource>
+        
+        <asp:Label ID="panelMensajes" runat="server" Text=""></asp:Label>
+        
     </form>
 </body>
 </html>

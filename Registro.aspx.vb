@@ -11,16 +11,48 @@ Partial Class Registro
     End Sub
 
     Private Sub SPRegistroDS_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SPRegistroDS.Inserted
+
         Dim email As TextBox = fvOretube.FindControl("emailTextBox")
         Dim ruta As String
         ruta = "http://172.21.240.32/oretube/activacion.aspx?K="
         Dim clave = e.Command.Parameters("@k").Value.ToString
 
-        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
 
+        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
+        Response.Write("clave : " & clave & "<br>")
         Response.Write(cuerpo)
-        'Response.Write(EnviarEmail(email.Text, "testing", cuerpo))'
+        EnviarEmail(email.Text, "testing", cuerpo)
     End Sub
+
+    Private Sub SPRegistroDS_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SPRegistroDS.Inserting
+        If (Esta(e.Command.Parameters("@login").Value)) Then
+            e.Cancel = True
+            Throw New Exception("El usuario ya existe!")
+        End If
+    End Sub
+
+    Private Sub fvOretube_ItemInserted(sender As Object, e As FormViewInsertedEventArgs) Handles fvOretube.ItemInserted
+        If e.Exception IsNot Nothing Then
+
+            panelMensajes.Text = e.Exception.Message
+
+            e.ExceptionHandled = True
+
+            e.KeepInInsertMode = True
+        Else
+            If e.AffectedRows > 0 Then 'comprobar que la key no sea null o vacia
+
+                panelMensajes.Text = "Añadido Correctamente"
+
+            Else
+                panelMensajes.Text = "El Usuario no se pudo Añadir"
+                e.KeepInInsertMode = True
+            End If
+        End If
+        Response.Write(e.AffectedRows)
+    End Sub
+
+
 
     Public Function EnviarEmail(ByVal direccion As String, ByVal asunto As String, ByVal mensaje As String, ByVal ParamArray adjuntos() As String) As Boolean 'Los ParamArray son opcionales
         Dim ok As Boolean = True
@@ -61,8 +93,10 @@ Partial Class Registro
     <System.Web.Services.WebMethod>
     Public Function Esta(ByVal login As String) As Boolean
         Dim ok = True
-        Dim conexion As String = "Data Source=(local);Intial catalog=Oretube;Integrated Security=True"
-        Dim cnx As New SqlConnection(conexion)
+
+        Dim cnx As New SqlConnection With {
+           .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+    }
         Dim sentencia As String = "select login from Usuario where login=@login"
         Dim cmd As New SqlCommand(sentencia, cnx)
         cmd.Parameters.AddWithValue("@login", login)
@@ -70,7 +104,7 @@ Partial Class Registro
         Try
             cnx.Open()
             Dim resultado As String = cmd.ExecuteScalar()
-            If Not String.IsNullOrEmpty(resultado) Then ok = False
+            If String.IsNullOrEmpty(resultado) Then ok = False
 
 
         Catch ex As Exception
@@ -78,9 +112,10 @@ Partial Class Registro
         Finally
             cnx.Close()
         End Try
-
         Return ok
     End Function
+
+
 
 
 End Class
