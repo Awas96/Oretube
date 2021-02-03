@@ -20,7 +20,7 @@ Partial Class Registro
 
         Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
         Response.Write("clave : " & clave & "<br>")
-        Response.Write(cuerpo)
+
         EnviarEmail(email.Text, "testing", cuerpo)
     End Sub
 
@@ -40,16 +40,11 @@ Partial Class Registro
 
             e.KeepInInsertMode = True
         Else
-            If e.AffectedRows > 0 Then 'comprobar que la key no sea null o vacia
 
-                panelMensajes.Text = "Añadido Correctamente"
-
-            Else
-                panelMensajes.Text = "El Usuario no se pudo Añadir"
-                e.KeepInInsertMode = True
-            End If
+            panelMensajes.Text = "Añadido Correctamente"
+            e.KeepInInsertMode = True
         End If
-        Response.Write(e.AffectedRows)
+
     End Sub
 
 
