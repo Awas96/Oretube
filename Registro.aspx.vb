@@ -21,7 +21,7 @@ Partial Class Registro
         Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
         Response.Write("clave : " & clave & "<br>")
 
-        EnviarEmail(email.Text, "testing", cuerpo)
+        EnviarEmail(email.Text, "Email de Activacion para Oretube!", cuerpo)
     End Sub
 
     Private Sub SPRegistroDS_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SPRegistroDS.Inserting

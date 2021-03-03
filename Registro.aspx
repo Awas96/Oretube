@@ -24,7 +24,7 @@
                 <br />
                 password:
                    
-                <asp:TextBox ID="passwordTextBox" runat="server" Text='<%# Bind("password") %>' />
+                <asp:TextBox ID="passwordTextBox" TextMode="Password" runat="server" Text='<%# Bind("password") %>' />
                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ControlToValidate="passwordTextBox" EnableTheming="True" ErrorMessage="Introuzca su contraseña."></asp:RequiredFieldValidator>
 
                 <br />
