@@ -10,7 +10,7 @@ Partial Class Activacion
             SqlDSActivar.Update()
             LbResult.Text = "Usuario Activado Satisfactoriamente!"
         Else
-            LbResult.Text = "Ha Habido un problema con la activación. Por favor, vuelve a escribir tu correo..."
+            LbResult.Text = "Ha Habido un problema con la activación. Por favor, vuelve a leer tu correo..."
         End If
 
     End Sub

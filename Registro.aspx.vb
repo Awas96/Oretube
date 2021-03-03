@@ -18,7 +18,7 @@ Partial Class Registro
         Dim clave = e.Command.Parameters("@k").Value.ToString
 
 
-        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave
+        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave & "(Solo funcional en Clase)"
         Response.Write("clave : " & clave & "<br>")
 
         EnviarEmail(email.Text, "Email de Activacion para Oretube!", cuerpo)
