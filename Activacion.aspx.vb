@@ -5,10 +5,12 @@ Partial Class Activacion
     Inherits System.Web.UI.Page
 
     Private Sub Activacion_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim query As String = Request.QueryString("k"
+        Dim query As String = Request.QueryString("k")
         If existe(query) Then
-            'activar(query)
-            Response.Write("si es")
+            SqlDSActivar.Update()
+            LbResult.Text = "Usuario Activado Satisfactoriamente!"
+        Else
+            LbResult.Text = "Ha Habido un problema con la activación. Por favor, vuelve a escribir tu correo..."
         End If
 
     End Sub
@@ -18,7 +20,7 @@ Partial Class Activacion
         Dim cnx As New SqlConnection With {
            .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
     }
-        Dim sentencia As String = "select count(*) from Usuario where key=@key"
+        Dim sentencia As String = "select count(*) from Usuario where [key] =  @key"
         Dim cmd As New SqlCommand(sentencia, cnx)
         cmd.Parameters.AddWithValue("@key", key)
 
@@ -26,14 +28,14 @@ Partial Class Activacion
             cnx.Open()
             Dim resultado As Int32 = cmd.ExecuteScalar()
             If resultado > 0 Then ok = True
-            Response.Write("Resultado = " & resultado)
 
         Catch ex As Exception
-
+            LbResult.Text = ex.Message
         Finally
             cnx.Close()
         End Try
         Return ok
     End Function
+
 
 End Class
