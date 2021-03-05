@@ -46,7 +46,7 @@
                     <asp:ListItem Text="Elige departamento" Value="" />
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvDepartamento" runat="server" ErrorMessage="Elige un departamento" ControlToValidate="ddlDepartamento" ForeColor="red"></asp:RequiredFieldValidator>
-                <asp:SqlDataSource ID="SqlDsDepartamento" runat="server" ConnectionString="<%$ ConnectionStrings:oretube %>" SelectCommand="SELECT * FROM [Departamento]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDsDepartamento" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>" SelectCommand="SELECT * FROM [Departamento]"></asp:SqlDataSource>
                 <br />
                 <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
 

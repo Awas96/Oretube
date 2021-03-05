@@ -105,11 +105,11 @@ Public Class Codigo
         Dim pagina As String = Nothing
 
         Select Case funcion
-            Case 1
+            Case 0
                 pagina = "Contenido" & "/" & "Registrado" & "/" & "index.aspx"
-            Case 2
+            Case 1
                 pagina = "Contenido" & "/" & "Lector" & "/" & "index.aspx"
-            Case 3
+            Case 2
                 pagina = "Contenido" & "/" & "Editor" & "/" & "index.aspx"
 
         End Select

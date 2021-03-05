@@ -59,7 +59,7 @@
                 <br />
                 <asp:Label runat="server" >¿No tienes cuenta?</asp:Label> 
                  <asp:HyperLink ID="HLRegistro" runat="server"  NavigateUrl ="~/Registro.aspx" text="Regístrese" />
-               
+                  <a  href='/Contenido/Anonimo/Registro.aspx' >Regístrese</a>
             </div>
 
         </div>
