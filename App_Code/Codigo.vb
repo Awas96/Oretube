@@ -4,21 +4,23 @@ Imports Microsoft.VisualBasic
 
 Public Class Codigo
     Public Shared Function DUsuario(ByVal usuario As String, ByVal clave As String) As DataTable
-        Dim sentencia As String = "SELECT Usuario.*, Rol.* FROM(Usuario join asignacionRol On Usuario.id = asignacionRol.idUsuario) JOIN Rol on asignacionRol.idRol = Rol.idRol WHERE Usuario.alias=@alias AND Usuario.clave=@clave"
+        Dim sentencia As String = "SELECT Usuario.* WHERE Usuario.login=@login AND Usuario.password=@password"
         Dim cmd As New SqlCommand(sentencia)
-        cmd.Parameters.Add("@alias", SqlDbType.VarChar, 256).Value = usuario
-        cmd.Parameters.Add("@clave", SqlDbType.VarChar, 256).Value = clave
+        cmd.Parameters.Add("@login", SqlDbType.VarChar, 256).Value = usuario
+        cmd.Parameters.Add("@password", SqlDbType.VarChar, 256).Value = clave
         Return ExecCMD(cmd)
     End Function
     Public Shared Function DUsuario(ByVal idusuario As Integer) As DataTable
-        Dim sentencia As String = "SELECT Usuario.*, Rol.* FROM (Usuario join asignacionRol on Usuario.id = asignacionRol.idUsuario) JOIN Rol on asignacionRol.idRol = Rol.idRol WHERE Usuario.id=@id"
+        Dim sentencia As String = "SELECT Usuario.* WHERE id=@id"
         Dim cmd As New SqlCommand(sentencia)
         cmd.Parameters.Add("@id", SqlDbType.Int).Value = idusuario
         Return ExecCMD(cmd)
     End Function
     Public Shared Function ExecCMD(ByVal cmd As SqlCommand) As DataTable
-        Dim conexion As String = ConfigurationManager.ConnectionStrings("SistemaDeRankingConnectionString").ToString
-        Dim cnx As New SqlConnection(conexion)
+
+        Dim cnx As New SqlConnection With {
+            .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+        }
         cmd.Connection = cnx
         Dim dt As New DataTable
         Try
@@ -33,17 +35,20 @@ Public Class Codigo
         End Try
         Return dt
     End Function
-    Public Shared Sub SetRol()
-        Dim conexion As String = ConfigurationManager.ConnectionStrings("SistemaDeRankingConnectionString").ToString
-        Dim sentencia As String = "SELECT idRol FROM Rol"
-        Dim cnx As New SqlConnection(conexion)
+    Public Shared Sub SetRoles()
+
+        Dim cnx As New SqlConnection With {
+            .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+        }
+        Dim sentencia As String = "SELECT id FROM Rol"
+
         Dim dr As SqlDataReader
         Try
             Dim cmd As New SqlCommand(sentencia, cnx)
             cnx.Open()
             dr = cmd.ExecuteReader()
             While dr.Read
-                If Not Rol.RoleExists(dr.GetInt32(0)) Then Rol.CreateRole(dr.GetInt32(0))
+                If Not Roles.RoleExists(dr.GetByte(0)) Then Roles.CreateRole(dr.GetByte(0))
             End While
         Catch ex As SystemException
             Throw New System.Exception(ex.Message)
@@ -57,17 +62,17 @@ Public Class Codigo
 
         Dim ok As Boolean = True
         Try
-            If Not My.User.IsInRole(rol) Then rol.AddUserToRole(usuario, rol)
+            If Not My.User.IsInRole(rol) Then Roles.AddUserToRole(usuario, rol)
         Catch ex As Exception
             ok = False
         End Try
         Return ok
     End Function
 
-    Public Shared Function RemoveUsuarioyRol(ByVal usuario As String, ByVal _Rol() As String) As Boolean
+    Public Shared Function RemoveUsuarioyRoles(ByVal usuario As String, ByVal _Rol() As String) As Boolean
         Dim ok As Boolean = True
         Try
-            Rol.RemoveUserFromRol(usuario, _Rol)
+            Roles.RemoveUserFromRoles(usuario, _Rol)
             Membership.DeleteUser(usuario)
         Catch ex As Exception
             ok = False
@@ -77,7 +82,7 @@ Public Class Codigo
 
     Public Shared Sub Salir(ByVal usuario As String, ByVal mismaCuenta As Boolean)
 
-        Codigo.RemoveUsuarioyRol(usuario, Rol.GetRolForUser(usuario))
+        Codigo.RemoveUsuarioyRoles(usuario, Roles.GetRolesForUser(usuario))
 
         If Not mismaCuenta Then
 

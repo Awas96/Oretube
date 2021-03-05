@@ -1,5 +1,5 @@
 ﻿
-Imports Recaptcha.Web
+
 
 Partial Class login
     Inherits System.Web.UI.Page
@@ -7,7 +7,7 @@ Partial Class login
     Dim us As Integer
 
     Private Sub Login_Init(sender As Object, e As EventArgs) Handles Me.Init
-        TBAlias.Attributes.Add("placeholder", "Introduce tu correo electrónico")
+        TBAlias.Attributes.Add("placeholder", "Introduce tu nombre de usuario")
         TBClave.Attributes.Add("placeholder", "Contraseña")
 
         If Request.IsAuthenticated Then
@@ -45,5 +45,7 @@ Partial Class login
 
     End Sub
 
-
+    Private Sub LbRegistro_Click(sender As Object, e As EventArgs) Handles LbRegistro.Click
+        Response.Redirect("Registro.aspx") '
+    End Sub
 End Class
