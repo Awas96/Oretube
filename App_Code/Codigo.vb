@@ -3,17 +3,23 @@ Imports System.Data.SqlClient
 Imports Microsoft.VisualBasic
 
 Public Class Codigo
-    Public Shared Function DUsuario(ByVal usuario As String, ByVal clave As String) As DataTable
-        Dim sentencia As String = "SELECT Usuario.* WHERE Usuario.login=@login AND Usuario.password=@password"
+
+    ' Sobrecarga(1) de dUsuario, para obtener el DataTable con todos los datos del usuario a partir de su email y el password.
+    Public Shared Function dUsuario(ByVal usuario As String, ByVal clave As String) As DataTable
+        Dim sentencia As String = "select Usuario.*, Rol.* from (Usuario join Rol on Usuario.rol=Rol.id) where Usuario.email= @email or Usuario.login= @login and Usuario.password= @password and activado=1"
+
         Dim cmd As New SqlCommand(sentencia)
-        cmd.Parameters.Add("@login", SqlDbType.VarChar, 256).Value = usuario
-        cmd.Parameters.Add("@password", SqlDbType.VarChar, 256).Value = clave
+        cmd.Parameters.Add("@login", SqlDbType.VarChar, 80).Value = usuario
+        cmd.Parameters.Add("@email", SqlDbType.VarChar, 80).Value = usuario
+        cmd.Parameters.Add("@password", SqlDbType.VarChar, 15).Value = clave
         Return ExecCMD(cmd)
     End Function
-    Public Shared Function DUsuario(ByVal idusuario As Integer) As DataTable
-        Dim sentencia As String = "SELECT Usuario.* WHERE id=@id"
+
+    ' Sobrecarga(2) de dUsuario, para obtener el DataTable con todos los datos del usuario a partir del idUsuario.
+    Public Shared Function dUsuario(ByVal idusuario As Int32) As DataTable
+        Dim sentencia As String = "select Usuario.*, Rol.* from (Usuario join Rol on Usuario.rol=Rol.id) where Usuario.id= @idUsuario and activado=1"
         Dim cmd As New SqlCommand(sentencia)
-        cmd.Parameters.Add("@id", SqlDbType.Int).Value = idusuario
+        cmd.Parameters.Add("@idUsuario", SqlDbType.Int).Value = idusuario
         Return ExecCMD(cmd)
     End Function
     Public Shared Function ExecCMD(ByVal cmd As SqlCommand) As DataTable
@@ -69,10 +75,10 @@ Public Class Codigo
         Return ok
     End Function
 
-    Public Shared Function RemoveUsuarioyRoles(ByVal usuario As String, ByVal _Rol() As String) As Boolean
+    Public Shared Function RemoveUsuarioyRoles(ByVal usuario As String, ByVal _roles() As String) As Boolean
         Dim ok As Boolean = True
         Try
-            Roles.RemoveUserFromRoles(usuario, _Rol)
+            Roles.RemoveUserFromRoles(usuario, _roles)
             Membership.DeleteUser(usuario)
         Catch ex As Exception
             ok = False
@@ -100,34 +106,14 @@ Public Class Codigo
 
         Select Case funcion
             Case 1
-                pagina = "Contenido" & "/" & "Administrador" & "/" & "index.aspx"
+                pagina = "Contenido" & "/" & "Registrado" & "/" & "index.aspx"
             Case 2
-                pagina = "Contenido" & "/" & "Gestor" & "/" & "index.aspx"
+                pagina = "Contenido" & "/" & "Lector" & "/" & "index.aspx"
             Case 3
-                pagina = "Contenido" & "/" & "Usuario" & "/" & "index.aspx"
+                pagina = "Contenido" & "/" & "Editor" & "/" & "index.aspx"
 
         End Select
         Return pagina
     End Function
-
-    Public Shared Function buscaNombre(ByRef idus As Integer) As String
-        Dim cnx As SqlConnection = New SqlConnection("Data Source=(local);Initial Catalog=SistemaDeRanking;Integrated Security=SSPI;")
-        Dim sentencia As String = "SELECT alias FROM Usuario WHERE id = " & idus
-        Dim cmd As SqlCommand = New SqlCommand(sentencia, cnx)
-        Dim nombre As String = ""
-
-
-        Try
-            cnx.Open()
-            nombre = cmd.ExecuteScalar()
-        Catch ex As Exception
-
-        End Try
-        cnx.Close()
-
-        Return nombre
-    End Function
-
-
 
 End Class

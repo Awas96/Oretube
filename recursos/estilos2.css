@@ -32,8 +32,8 @@
 
 .circle-mask {
     display: block;
-    height: 96px;
-    width: 96px;
+    height: 157px;
+    width: 258px;
     overflow: hidden;
     border-radius: 50%;
     margin-left: auto;
@@ -41,13 +41,13 @@
     margin-bottom: 10px;
     background-size: 96px;
     background-repeat: no-repeat;
-    background-image: url("imagenes/avatar_2x.png");
+    background-image: url('imagenes/avatar_2x.png');
     transition: opacity 0.075s;
 }
 
 .circle {
-    height: 96px;
-    width: 96px;
+    height: 64px;
+    width: 64px;
     border-radius: 50%;
     opacity: 0.99;
     overflow: hidden;

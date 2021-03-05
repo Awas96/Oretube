@@ -12,13 +12,11 @@ Partial Class login
 
         If Request.IsAuthenticated Then
             Session("dUsuario") = Codigo.DUsuario(User.Identity.Name)
-            Response.Redirect("froles.aspx") '
+            Response.Redirect("froles.aspx")
         End If
 
 
     End Sub
-
-
 
 
 
@@ -26,18 +24,11 @@ Partial Class login
 
 
         Dim ok As Boolean = False
-
-        Session("dUsuario") = Codigo.DUsuario(TBAlias.Text, TBClave.Text)
-
-        If Session("dUsuario").Rows.Count > 0 And ok Then
+        Session("dUsuario") = Codigo.dUsuario(TBAlias.Text, TBClave.Text)
+        If Session("dUsuario").Rows.Count > 0 Then
             us = Session("dUsuario").Rows(0).item(0)
-
-
             Codigo.RemoveUsuarioyRoles(us, Roles.GetRolesForUser(us))
-
             args.IsValid = True
-
-
             FormsAuthentication.RedirectFromLoginPage(us, CKrecordar.Checked)
         Else
             args.IsValid = False
@@ -45,7 +36,5 @@ Partial Class login
 
     End Sub
 
-    Private Sub LbRegistro_Click(sender As Object, e As EventArgs) Handles LbRegistro.Click
-        Response.Redirect("Registro.aspx") '
-    End Sub
+
 End Class

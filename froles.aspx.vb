@@ -12,7 +12,7 @@ Partial Class froles
             If Not IsPostBack Then
 
                 For Each fila As DataRow In Session("dUsuario").Rows
-                    DDLroles.Items.Add(New ListItem With {.Text = fila("rol"), .Value = fila("idRol")})
+                    DDLroles.Items.Add(New ListItem With {.Text = fila("rol"), .Value = fila("id")})
                 Next
 
             End If

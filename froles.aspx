@@ -29,7 +29,7 @@ function maximizar()
 <body onload="maximizar()">
     <form id="miForm" runat="server">
         <div class="intro">
-             <asp:Image ID="logo" runat="server" ImageUrl="~/imagenes/logo.png"  Width="100px"  />
+             
              <div class="aviso">
                   <asp:Label ID="aviso" runat="server" Text="Seleccione su rol de trabajo" />
              </div>
@@ -37,7 +37,9 @@ function maximizar()
         <div class="tarjeta-in">
              <div style="padding-top:25px;">
                 <div class="circle-mask" >
-                     <canvas id="canvas" class="circle" width="96" height="96"></canvas>
+                         <asp:Image ID="logo" runat="server" ImageUrl="~/imagenes/logo.png"  Width="243px" Height="147px"  />
+                     <canvas id="canvas" class="circle">
+                     </canvas>
                 </div>
              </div>
              <div style="margin-top:40px;">
@@ -46,10 +48,11 @@ function maximizar()
             
              <div style="margin-top:40px">
                  <asp:Button ID="BTempezar" runat="server" Text="Comenzar trabajo" CssClass="boton" />
+                 <br />
+                   <asp:CheckBox ID="CKcontinuar" runat="server" Checked="True"  Text="Seguir con la misma cuenta"/>
              </div>
 
              <div style="text-align:left;padding-left:20px;margin-top:20px">
-                   <asp:CheckBox ID="CKcontinuar" runat="server" Checked="True"  Text="Seguir con la misma cuenta"/>
              </div>
         </div>
     </form>

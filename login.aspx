@@ -58,7 +58,8 @@
                 <asp:CheckBox ID="CKrecordar" runat="server" Checked="False" Text="Recordar en este equipo" />
                 <br />
                 <asp:Label runat="server" >¿No tienes cuenta?</asp:Label> 
-                <asp:LinkButton ID="LbRegistro" runat="server">Registrate</asp:LinkButton>
+                 <asp:HyperLink ID="HLRegistro" runat="server"  NavigateUrl ="~/Registro.aspx" text="Regístrese" />
+               
             </div>
 
         </div>
