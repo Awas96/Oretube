@@ -47,6 +47,10 @@ Partial Class Registro
 
     End Sub
 
+    Private Sub LbSalir_Click(sender As Object, e As EventArgs) Handles LbSalir.Click
+        Response.Redirect("../../login.aspx")
+    End Sub
+
 
 
     Public Function EnviarEmail(ByVal direccion As String, ByVal asunto As String, ByVal mensaje As String, ByVal ParamArray adjuntos() As String) As Boolean 'Los ParamArray son opcionales
@@ -110,7 +114,7 @@ Partial Class Registro
         Return ok
     End Function
 
-
+    
 
 
 End Class

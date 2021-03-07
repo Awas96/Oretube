@@ -14,7 +14,7 @@ Partial Class froles
                 Next
             End If
         Else
-            ' Response.Redirect(Codigo.Redireccion(Roles.GetRolesForUser(us)(0)))
+            Response.Redirect(Codigo.Redireccion(Roles.GetRolesForUser(us)(0)))
         End If
     End Sub
     Protected Sub BTempezar_Click(sender As Object, e As EventArgs) Handles BTempezar.Click
@@ -24,7 +24,7 @@ Partial Class froles
                 Codigo.UsuarioINrol(us, DDLroles.SelectedValue)
                 Response.Redirect(Codigo.Redireccion(DDLroles.SelectedValue))
             Else
-                'Response.Redirect(Codigo.Redireccion(Roles.GetRolesForUser(us)(0)))
+                Response.Redirect(Codigo.Redireccion(Roles.GetRolesForUser(us)(0)))
             End If
         Else
             Codigo.Salir(us, False)

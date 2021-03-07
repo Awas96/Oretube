@@ -115,5 +115,26 @@ Public Class Codigo
         End Select
         Return pagina
     End Function
+    Public Shared Function buscaNombre(ByRef idus As Integer) As String
+
+        Dim cnx As New SqlConnection With {
+            .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+        }
+        Dim sentencia As String = "SELECT login FROM Usuario WHERE id = " & idus
+        Dim cmd As SqlCommand = New SqlCommand(sentencia, cnx)
+        Dim nombre As String = ""
+
+
+        Try
+            cnx.Open()
+            nombre = cmd.ExecuteScalar()
+        Catch ex As Exception
+
+        End Try
+        cnx.Close()
+
+        Return nombre
+    End Function
+
 
 End Class

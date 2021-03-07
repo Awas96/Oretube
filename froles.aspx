@@ -46,7 +46,7 @@ function maximizar()
                    <asp:DropDownList ID="DDLroles" runat="server" CssClass="textbox" />
              </div>
             
-             <div style="margin-top:40px">
+             <div style="padding-top:40px">
                  <asp:Button ID="BTempezar" runat="server" Text="Comenzar trabajo" CssClass="boton" />
                  <br />
                    <asp:CheckBox ID="CKcontinuar" runat="server" Checked="True"  Text="Seguir con la misma cuenta"/>
