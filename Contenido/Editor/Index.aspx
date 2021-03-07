@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="VB" MasterPageFile="~/base.master" AutoEventWireup="false" CodeFile="Index.aspx.vb" Inherits="Contenido_Editor_Index" %>
 
 <%@ Register Src="~/controlPersonalizado/miReproductor.ascx" TagPrefix="mr" TagName="miReproductor" %>
+<%@ Register Src="~/controlPersonalizado/miImagen.ascx" TagPrefix="mi" TagName="miImagen" %>
 
 
 
@@ -38,9 +39,9 @@
                         </p>
                     </ItemTemplate>
                 </asp:FormView>
-                <asp:SqlDataSource ID="SqlDsVideoPrincipal" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>" 
-                    SelectCommand="SELECT * FROM [Video] WHERE ([url] = @url)" >
-                   
+                <asp:SqlDataSource ID="SqlDsVideoPrincipal" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>"
+                    SelectCommand="SELECT * FROM [Video] WHERE ([url] = @url)">
+
                     <SelectParameters>
                         <asp:Parameter Name="url" Type="String" />
                     </SelectParameters>
@@ -59,31 +60,26 @@
 <%-- Div Vídeos verticales lateral derecho --%>
 <asp:Content ID="cBarraMenu" ContentPlaceHolderID="CPHAside1" runat="Server">
     <asp:ListView ID="LBSeleccionVideo" runat="server" DataKeyNames="id" DataSourceID="SQLDSSeleccionVideos">
-         <ItemTemplate>
-            <div class="videoPrincipal">
-                <mr:miReproductor ID="videoBarraLateral" runat="server" setSrc='<%# Eval("url") %>' />
+        <ItemTemplate>
+            <div class="imagenVideo">
+
+                <mi:miImagen ID="imagenBarraLateral" runat="server" setSrc='<%# Eval("url") %>' />
             </div>
-            titulo:
-            <asp:Label ID="tituloLabel" runat="server" Text='<%# Eval("titulo") %>' />
-            <br />
-            descripcion:
-            <asp:Label ID="descripcionLabel" runat="server" Text='<%# Eval("descripcion") %>' />
-            <br />
-            fecha:
-            <asp:Label ID="fechaLabel" runat="server" Text='<%# Eval("fecha") %>' />
-            <br />
-            duracion:
-            <asp:Label ID="duracionLabel" runat="server" Text='<%# Eval("duracion") %>' />
-            <br />
-            visualizacion:
-            <asp:Label ID="visualizacionLabel" runat="server" Text='<%# Eval("visualizacion") %>' />
-            <br />
-            <br />
-            </span>
+
+            <div class="infoVideo">
+               
+                    <asp:Label ID="tituloLabel" runat="server" CssClass="titulo" Text='<%# Eval("titulo") %>' />
+                    <asp:Label ID="fechaLabel" runat="server" Text='<%# Eval("fecha") %>' />
+                
+                <div>
+                    <asp:Label ID="visualizacionLabel" runat="server" Text='<%# Eval("visualizacion") %>' />
+                    Visualizaciones
+                </div>
+            </div>
+
         </ItemTemplate>
-         
+
     </asp:ListView>
     <asp:SqlDataSource ID="SQLDSSeleccionVideos" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>"
-        SelectCommand="SELECT * FROM [Video] ORDER BY [fecha] DESC">
-    </asp:SqlDataSource>
+        SelectCommand="SELECT * FROM [Video] ORDER BY [fecha] DESC"></asp:SqlDataSource>
 </asp:Content>

@@ -1,5 +1,5 @@
 ﻿
-Partial Class MiReproductor
+Partial Class MiImagen
     Inherits System.Web.UI.UserControl
 
     Protected src As String
@@ -17,7 +17,7 @@ Partial Class MiReproductor
     End Property
 
     Public Function construirPath(Optional ByVal rol As String = "0") As String
-        Dim url As String = "/deposit/" & rol & "/" & src & ".mp4#t=1"
+        Dim url As String = "/deposit/" & rol & "/" & src & ".png"
         Return url
     End Function
 End Class

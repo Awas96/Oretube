@@ -26,6 +26,21 @@ aside{
 }
 
 .video{
-    width: 100%
+    width: 100%;
     
+}
+.imagen{
+   width: 100%;
+
+}
+
+.infoVideo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.titulo {
+    font-size: 1.5em;
+    font-weight: bold;
 }

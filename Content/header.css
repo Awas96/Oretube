@@ -219,7 +219,7 @@ nav ul li ul {
 
     nav ul li ul li {
         border: none;
-        padding-bottom: 100px;
+        padding-bottom: 10;
         padding-left: 10px;
         height: 50px;
         width: 300px;
@@ -247,7 +247,7 @@ nav ul li.selected ul li a {
 
 .hidden {
   
-    display: none;
+   display: none;
 }
 .overflow {
     overflow: hidden;
