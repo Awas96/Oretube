@@ -14,12 +14,12 @@ Partial Class Registro
 
         Dim email As TextBox = fvOretube.FindControl("emailTextBox")
         Dim ruta As String
-        ruta = "http://172.21.240.32/oretube/activacion.aspx?K="
+        ruta = "http://172.21.240.32/Contenido/anonimo/activacion.aspx?K="
         Dim clave = e.Command.Parameters("@k").Value.ToString
 
 
-        Dim cuerpo As String = "para validar el usuario pincha en el enlace a continuacion..." & ruta & clave & "(Solo funcional en Clase)"
-        Response.Write("clave : " & clave & "<br>")
+        Dim cuerpo As String = "Para validar el usuario pincha en el enlace a continuacion... </br>" & ruta & clave & " (Solo funcional en Clase)"
+
 
         EnviarEmail(email.Text, "Email de Activacion para Oretube!", cuerpo)
     End Sub

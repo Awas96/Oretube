@@ -1,0 +1,31 @@
+﻿body {
+}
+
+.main {
+    display: flex;  
+    justify-content: space-around;
+    background-color: aliceblue;
+    padding-top: 2em;
+
+}
+
+section {
+    width: 65%;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px dotted gray;
+}
+
+aside{
+    display: flex;
+    width: 25%
+}
+
+.video{
+    width: 100%
+    
+}

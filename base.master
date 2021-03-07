@@ -1,0 +1,72 @@
+﻿<%@ Master Language="VB" CodeFile="base.master.vb" Inherits="video" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/header.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/popper.min.js"></script>
+    <script src="/Scripts/fontawesome.js"></script>
+    <script src="/Scripts/header.js"></script>
+    <script src="/Content/fontawesome.css"></script>
+</head>
+<body>
+    <form id="fVideo" runat="server">
+        <header>
+            <asp:Image ID="imgBt1" CssClass="timlogo" runat="server" ImageUrl="~/imagenes/logo.png" />
+            <div class="nav-modal">
+                <div class="blob"></div>
+                <nav>
+                    <ul>
+                        <li>
+                            <a runat="server">Logueado como </a><a runat="server" id="TituloNombreUsuario">Usuario</a>
+                        </li>
+                        <li>
+                            <asp:LinkButton CssClass="text-center" runat="server" ID="BtnSalir" Text="Salir de la Aplicacion"></asp:LinkButton>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="head">
+                <div class="tile burger">
+                    <div class="meat">
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+            <main class="main">
+                <section>
+                    <article>
+                        <div class="Section1">
+                            <asp:ContentPlaceHolder ID="CPHContenido1" runat="server">
+                            </asp:ContentPlaceHolder>
+                            <div class="Section2">
+                                <asp:ContentPlaceHolder ID="CPHContenido2" runat="server">
+                                    placeholder info
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+                <aside>
+                    <div class="aside1">
+                        <asp:ContentPlaceHolder ID="CPHAside1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </aside>
+            </main>
+      
+    </form>
+</body>
+</html>

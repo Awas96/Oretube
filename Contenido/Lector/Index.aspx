@@ -26,8 +26,9 @@
                     <ul>
                        
                         <li><a runat="server" id="TituloNombreUsuario">Usuario</a></li>
-                        <li><a runat="server">Logueado como Registrado</a></li>
+                        <li><a runat="server">Logueado como Lector</a></li>
                         <li><asp:LinkButton CssClass="text-center" runat="server" ID="BtnSalir" Text="Salir de la Lector"></asp:LinkButton></li>
+                        </ul>
                 </nav>
             </div>
             <div class="head">
@@ -43,10 +44,9 @@
                 </div>
             </div>
         </header>
-        <section>
-            <h1>Welcome to Oretube!</h1>
-
-        </section>
+        <main>
+            <section></section>
+        </main>
     </form>
 </body>
 </html>

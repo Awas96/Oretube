@@ -28,7 +28,7 @@
 
                             <li><a runat="server" id="TituloNombreUsuario">Anonimo</a></li>
                            
-                               
+                        </ul>       
                     </nav>
                 </div>
                 <div class="head">
