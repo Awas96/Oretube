@@ -8,10 +8,7 @@
 <%-- Div video principal --%>
 <asp:Content ID="cVideo" ContentPlaceHolderID="CPHContenido1" runat="Server">
 
-    <div class="videoPrincipal">
-        <mr:miReproductor ID="videoPrincipal" runat="server" />
-        <%-- controlUsuario --%>
-    </div>
+   
 
     <div class="infoVideo">
         <asp:ScriptManager ID="sm" runat="server">
@@ -20,6 +17,9 @@
             <ContentTemplate>
                 <asp:FormView ID="fvDatosVideo" runat="server" DataKeyNames="id" DataSourceID="SqlDsVideoPrincipal" DefaultMode="ReadOnly">
                     <ItemTemplate>
+                        <div class="videoPrincipal">
+                          <mr:miReproductor ID="videoPrincipal" runat="server" setSrc='<%# Eval("url") %>' />
+                        </div>
                         <p class="infoVideo__text">
                             <asp:Label ID="lblTitulo" runat="server" Text='<%# Eval("titulo") %>' />
                             -
@@ -43,13 +43,8 @@
                     SelectCommand="SELECT * FROM [Video] WHERE ([url] = @url)">
 
                     <SelectParameters>
-                        <asp:Parameter Name="url" Type="String" />
+                        <asp:QueryStringParameter Name="url" QueryStringField="vid" Type="String" />
                     </SelectParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="votante" Type="Int32" />
-                        <asp:Parameter Name="elVideo" Type="Int32" />
-                        <asp:Parameter Name="votacion" Type="Boolean" />
-                    </UpdateParameters>
                 </asp:SqlDataSource>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -62,23 +57,17 @@
     <asp:ListView ID="LBSeleccionVideo" runat="server" DataKeyNames="id" DataSourceID="SQLDSSeleccionVideos">
         <ItemTemplate>
             <div class="imagenVideo">
-
-                <mi:miImagen ID="imagenBarraLateral" runat="server" setSrc='<%# Eval("url") %>' />
+                <mi:miImagen ID="imagenBarraLateral" runat="server" setUrl='<%# "~/Contenido/editor/Index.aspx" %>'  setSrc='<%# Eval("url") %>' />
             </div>
-
             <div class="infoVideo">
-               
-                    <asp:Label ID="tituloLabel" runat="server" CssClass="titulo" Text='<%# Eval("titulo") %>' />
-                    <asp:Label ID="fechaLabel" runat="server" Text='<%# Eval("fecha") %>' />
-                
+                <asp:Label ID="tituloLabel" runat="server" CssClass="titulo" Text='<%# Eval("titulo") %>' />
+                <asp:Label ID="fechaLabel" runat="server" Text='<%# Eval("fecha") %>' />
                 <div>
                     <asp:Label ID="visualizacionLabel" runat="server" Text='<%# Eval("visualizacion") %>' />
                     Visualizaciones
                 </div>
             </div>
-
         </ItemTemplate>
-
     </asp:ListView>
     <asp:SqlDataSource ID="SQLDSSeleccionVideos" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>"
         SelectCommand="SELECT * FROM [Video] ORDER BY [fecha] DESC"></asp:SqlDataSource>

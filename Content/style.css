@@ -17,12 +17,11 @@ article {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border: 1px dotted gray;
 }
 
 aside{
     display: flex;
-    width: 25%
+    width: 20%
 }
 
 .video{
@@ -39,6 +38,7 @@ aside{
     flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding-bottom: 1.5em;
 }
 .titulo {
     font-size: 1.5em;
