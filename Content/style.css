@@ -44,3 +44,23 @@ aside{
     font-size: 1.5em;
     font-weight: bold;
 }
+
+.videoInfo {
+    display: flex;
+    flex-flow: column;
+}
+.videoTitulo {
+    font-size: 1.5em;
+    display: flex;
+    justify-content:space-between
+}
+.videoLikes {
+    display: flex;
+    justify-content: flex-end;
+
+}
+.videoMas {
+    display: flex;
+    flex-flow: column;
+
+}

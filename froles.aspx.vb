@@ -16,8 +16,7 @@ Partial Class froles
         Else
             Response.Redirect(Codigo.Redireccion(Roles.GetRolesForUser(us)(0)))
         End If
-    End Sub
-    Protected Sub BTempezar_Click(sender As Object, e As EventArgs) Handles BTempezar.Click
+
         us = Context.User.Identity.Name
         If CKcontinuar.Checked Then
             If us <> Nothing Then

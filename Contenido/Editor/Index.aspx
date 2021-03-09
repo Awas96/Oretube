@@ -8,7 +8,7 @@
 <%-- Div video principal --%>
 <asp:Content ID="cVideo" ContentPlaceHolderID="CPHContenido1" runat="Server">
 
-   
+
 
     <div class="infoVideo">
         <asp:ScriptManager ID="sm" runat="server">
@@ -18,25 +18,28 @@
                 <asp:FormView ID="fvDatosVideo" runat="server" DataKeyNames="id" DataSourceID="SqlDsVideoPrincipal" DefaultMode="ReadOnly">
                     <ItemTemplate>
                         <div class="videoPrincipal">
-                          <mr:miReproductor ID="videoPrincipal" runat="server" setSrc='<%# Eval("url") %>' />
+                            <mr:miReproductor ID="videoPrincipal" runat="server" setSrc='<%# Eval("url") %>' />
                         </div>
-                        <p class="infoVideo__text">
-                            <asp:Label ID="lblTitulo" runat="server" Text='<%# Eval("titulo") %>' />
-                            -
-                            <asp:Label ID="lblDescripcion" runat="server" Text='<%# Eval("descripcion") %>' />
-                        </p>
-                        <p class="infoVideo__text">
-                            visualizacion:
-                            <asp:Label ID="lblVisualizacion" runat="server" Text='<%# Eval("visualizacion") %>' />
-                            -
-                            <asp:Label ID="lblFecha" runat="server" Text='<%# Eval("fecha") %>' />
-                            <asp:ImageButton ID="imgBtLikes" runat="server" ImageUrl="~/img/likes.jpg" CommandName="Likes" CommandArgument='<%# Eval("id") %>' /><%-- id del video --%>
-
-                            <asp:Label ID="lbLikes" runat="server" Text='<%# Eval("likes") %>' />
-
-                            <asp:ImageButton ID="imgBtNoLikes" runat="server" ImageUrl="~/img/nolikes.jpg" CommandName="NoLikes" CommandArgument='<%# Eval("id") %>' /><%-- id del video --%>
-                            <asp:Label ID="lblNoLikes" runat="server" Text='<%# Eval("nolikes") %>' />
-                        </p>
+                        <div class="videoInfo">
+                            <div class="videoTitulo">
+                                <asp:Label ID="lblTitulo" runat="server" Text='<%# Eval("titulo") %>' />
+                                <div>
+                                    <asp:Label ID="lblVisualizacion" runat="server" Text='<%# Eval("visualizacion") %>' />
+                                    Visualizaciones
+                                </div>
+                            </div>
+                            <div class="videoLikes">
+                                <asp:ImageButton ID="imgBtLikes" runat="server" ImageUrl="~/img/likes.jpg" CommandName="Likes" CommandArgument='<%# Eval("id") %>' />
+                                <asp:Label ID="lbLikes" runat="server" Text='<%# Eval("likes") %>'></asp:Label>
+                                <asp:ImageButton ID="imgBtNoLikes" runat="server" ImageUrl="~/img/nolikes.jpg" CommandName="NoLikes" CommandArgument='<%# Eval("id") %>' />
+                                <asp:Label ID="lblNoLikes" runat="server" Text='<%# Eval("nolikes") %>'></asp:Label>
+                            </div>
+                            <div><input id="cb1" type="checkbox" /><label for="cb1">Mostrar mas</label></div>
+                            <div class="videoMas">
+                                <asp:Label ID="lblFecha" runat="server" Text='<%# Eval("fecha") %>' />
+                                <asp:Label ID="lblDescripcion" runat="server" Text='<%# Eval("descripcion") %>' />
+                            </div>
+                        </div>
                     </ItemTemplate>
                 </asp:FormView>
                 <asp:SqlDataSource ID="SqlDsVideoPrincipal" runat="server" ConnectionString="<%$ ConnectionStrings:oretubeConnectionString %>"
@@ -57,7 +60,7 @@
     <asp:ListView ID="LBSeleccionVideo" runat="server" DataKeyNames="id" DataSourceID="SQLDSSeleccionVideos">
         <ItemTemplate>
             <div class="imagenVideo">
-                <mi:miImagen ID="imagenBarraLateral" runat="server" setUrl='<%# "~/Contenido/editor/Index.aspx" %>'  setSrc='<%# Eval("url") %>' />
+                <mi:miImagen ID="imagenBarraLateral" runat="server" SetUrl='<%# "~/Contenido/editor/Index.aspx" %>' SetSrc='<%# Eval("url") %>' />
             </div>
             <div class="infoVideo">
                 <asp:Label ID="tituloLabel" runat="server" CssClass="titulo" Text='<%# Eval("titulo") %>' />
