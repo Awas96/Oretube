@@ -13,9 +13,10 @@
     <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
     <script src="/Scripts/popper.min.js"></script>
-    <script src="/Scripts/fontawesome.js"></script>
     <script src="/Scripts/header.js"></script>
-    <script src="/Content/fontawesome.css"></script>
+    <script src="/Scripts/fa.js"></script>
+
+    
 </head>
 <body>
     <form id="fVideo" runat="server">

@@ -40,14 +40,28 @@ aside{
     flex-wrap: wrap;
     padding-bottom: 1.5em;
 }
-.titulo {
-    font-size: 1.5em;
-    font-weight: bold;
+
+.info1 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+
+.videoTitulo {
+    font-size:3em;
+    font-weight: bolder;
+   
+    margin-bottom: 0.3em;
 }
 
 .videoInfo {
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
+    
 }
 .videoTitulo {
     font-size: 1.5em;
@@ -59,8 +73,29 @@ aside{
     justify-content: flex-end;
 
 }
+.videoFecha {
+  
+    text-align: start;
+    font-size: 1.2em;
+
+}
+.videoVisualizaciones {
+   
+    text-align: end;
+    font-size: 1.2em;
+   
+}
 .videoMas {
     display: flex;
     flex-flow: column;
+   
 
+}
+
+.bigger{
+    font-size: 1.5em;
+}
+
+.margen{
+    margin-right:2em;
 }

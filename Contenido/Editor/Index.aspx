@@ -21,23 +21,29 @@
                             <mr:miReproductor ID="videoPrincipal" runat="server" setSrc='<%# Eval("url") %>' />
                         </div>
                         <div class="videoInfo">
-                            <div class="videoTitulo">
-                                <asp:Label ID="lblTitulo" runat="server" Text='<%# Eval("titulo") %>' />
-                                <div>
-                                    <asp:Label ID="lblVisualizacion" runat="server" Text='<%# Eval("visualizacion") %>' />
-                                    Visualizaciones
+                            <div class="info1">
+                                <asp:Label ID="lblTitulo" runat="server" CssClass="videoTitulo w-50" Text='<%# Eval("titulo") %>' />
+                                <div class="videoLikes w-50">
+                                    <div>
+                                        <asp:Button ID="imgBtLikes" runat="server" CssClass="far fa-thumbs-up bigger" CommandName="Likes" CommandArgument='<%# Eval("id") %>' />
+                                        <asp:Label ID="lbLikes" for="imgbtLikes" runat="server" CssClass="bigger margen" Text='<%# Eval("likes") %>'></asp:Label>
+                                    </div>
+                                    <div>
+                                        <asp:Button ID="imgBtNoLikes" runat="server" CssClass="far fa-thumbs-down bigger" CommandName="NoLikes" CommandArgument='<%# Eval("id") %>' />
+                                        <asp:Label ID="lblNoLikes" runat="server" CssClass="bigger " Text='<%# Eval("nolikes") %>'></asp:Label>
+                                    </div>
                                 </div>
+                                <div class="videoFecha w-50">
+                                    <asp:Label ID="lblFecha" runat="server" Text='<%# Eval("fecha") %>' /></div>
+                                <div class="videoVisualizaciones w-50">
+                                    <asp:Label ID="lblVisualizacion" runat="server" Text='<%# Eval("visualizacion") %>' />Visualizaciones </div>
                             </div>
-                            <div class="videoLikes">
-                                <asp:ImageButton ID="imgBtLikes" runat="server" ImageUrl="~/img/likes.jpg" CommandName="Likes" CommandArgument='<%# Eval("id") %>' />
-                                <asp:Label ID="lbLikes" runat="server" Text='<%# Eval("likes") %>'></asp:Label>
-                                <asp:ImageButton ID="imgBtNoLikes" runat="server" ImageUrl="~/img/nolikes.jpg" CommandName="NoLikes" CommandArgument='<%# Eval("id") %>' />
-                                <asp:Label ID="lblNoLikes" runat="server" Text='<%# Eval("nolikes") %>'></asp:Label>
-                            </div>
-                            <div><input id="cb1" type="checkbox" /><label for="cb1">Mostrar mas</label></div>
-                            <div class="videoMas">
-                                <asp:Label ID="lblFecha" runat="server" Text='<%# Eval("fecha") %>' />
-                                <asp:Label ID="lblDescripcion" runat="server" Text='<%# Eval("descripcion") %>' />
+                            <div class="info2">
+                                <input id="cb1" type="checkbox" /><label for="cb1">Mostrar mas</label>
+                                <div class="videoMas">
+
+                                    <asp:Label ID="lblDescripcion" runat="server" Text='<%# Eval("descripcion") %>' />
+                                </div>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -68,6 +74,7 @@
                 <div>
                     <asp:Label ID="visualizacionLabel" runat="server" Text='<%# Eval("visualizacion") %>' />
                     Visualizaciones
+               
                 </div>
             </div>
         </ItemTemplate>
