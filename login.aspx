@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Login.aspx.vb" Inherits="login" %>
+<%@ Register Assembly="Recaptcha.Web" Namespace="Recaptcha.Web.UI.Controls"TagPrefix="cc1" %>
 
 <!DOCTYPE html>
 
@@ -33,7 +34,6 @@
             </div>
         </div>
         <div class="tarjeta-in" style="padding-bottom: 1.5em;">
-            
             <div style="padding-top: 25px;">
             </div>
             <div style="margin-top: 20px;">
@@ -48,6 +48,8 @@
                     <asp:RequiredFieldValidator ID="RFClave" runat="server" Display="Dynamic" ControlToValidate="TBClave" ErrorMessage="Introduce tu contraseña." CssClass="validator" />
                     <asp:RegularExpressionValidator ID="REClave" runat="server" Display="Dynamic" ControlToValidate="TBClave" ErrorMessage="Contraseña entre 3 y 15 caracteres" ValidationExpression="\w{3,15}" CssClass="validator" />
                     <asp:CustomValidator ID="CVok" runat="server" Display="Dynamic" ErrorMessage="Lo sentimos, el nombre del usuario y/o la contraseña no son correctos." CssClass="validator" OnServerValidate="OKusuario" />
+                    <cc1:Recaptcha ID="ReC" runat="server" Style="display: flex; justify-content: center; margin-top: 1em; margin-bottom: 1em;" />
+                    <asp:Label ID="lblMessage" runat="server" Style="color: red;"></asp:Label>
                 </div>
 
             </div>
@@ -57,8 +59,9 @@
             <div style="text-align: left; padding-left: 15px; margin-top: 10px">
                 <asp:CheckBox ID="CKrecordar" runat="server" Checked="False" Text="Recordar en este equipo" />
                 <br />
-                <asp:Label runat="server" >¿No tienes cuenta?</asp:Label> 
-                 <asp:HyperLink ID="HLRegistro" runat="server"  NavigateUrl ="~/Contenido/Anonimo/Registro.aspx" text="Regístrese" />  <%--No me lleva a la pagina de Registro--%>
+                <asp:Label runat="server">¿No tienes cuenta?</asp:Label>
+                <asp:HyperLink ID="HLRegistro" runat="server" NavigateUrl="~/Contenido/Anonimo/Registro.aspx" Text="Regístrese" />
+                <%--No me lleva a la pagina de Registro--%>
             </div>
         </div>
     </form>

@@ -1,6 +1,4 @@
-﻿
-
-
+﻿Imports Recaptcha.Web
 Partial Class login
     Inherits System.Web.UI.Page
 
@@ -24,11 +22,40 @@ Partial Class login
 
 
         Dim ok As Boolean = False
+
+        If String.IsNullOrEmpty(ReC.Response) Then
+
+
+            lblMessage.Text = "Captcha no se debe de dejar en blanco"
+        Else
+
+            Dim result As RecaptchaVerificationResult = ReC.Verify()
+
+            If result = RecaptchaVerificationResult.Success Then
+
+                ok = True
+
+            End If
+
+            If result = RecaptchaVerificationResult.IncorrectCaptchaSolution Then
+
+                lblMessage.Text = "Captcha no correcto"
+
+            End If
+        End If
+
+
         Session("dUsuario") = Codigo.dUsuario(TBAlias.Text, TBClave.Text)
-        If Session("dUsuario").Rows.Count > 0 Then
+
+        If Session("dUsuario").Rows.Count > 0 And ok Then
             us = Session("dUsuario").Rows(0).item(0)
+
+
             Codigo.RemoveUsuarioyRoles(us, Roles.GetRolesForUser(us))
+
             args.IsValid = True
+
+
             FormsAuthentication.RedirectFromLoginPage(us, CKrecordar.Checked)
         Else
             args.IsValid = False
