@@ -135,6 +135,82 @@ Public Class Codigo
 
         Return nombre
     End Function
+    Public Function BuscaVotos(ByVal id As String, voto As Integer) As Integer
+        Dim respuesta = 0
 
+        Dim cnx As New SqlConnection With {
+           .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+    }
+        Dim sentencia As String = "select Count(*) from voto where elVideo=@id AND votacion=@voto"
+        Dim cmd As New SqlCommand(sentencia, cnx)
+        cmd.Parameters.AddWithValue("@id", id)
+        cmd.Parameters.AddWithValue("@voto", voto)
+
+        Try
+            cnx.Open()
+            Dim resultado As String = cmd.ExecuteScalar()
+            If String.IsNullOrEmpty(resultado) Then respuesta = 0 Else respuesta = resultado
+
+        Catch ex As Exception
+            Throw ex
+        Finally
+            cnx.Close()
+        End Try
+        Return respuesta
+    End Function
+    Public Function BuscaVotosEnVideo(tipo As Integer, vid As String) As Integer
+        Dim respuesta = 0
+        If vid = Nothing Then
+            Return Nothing
+        End If
+        Dim sentencia = ""
+        Dim cnx As New SqlConnection With {
+           .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+    }
+        If tipo = 0 Then
+            sentencia = "select nolikes from video where url=@vid"
+        Else
+            sentencia = "select likes from video where url=@vid"
+        End If
+
+        Dim cmd As New SqlCommand(sentencia, cnx)
+        cmd.Parameters.AddWithValue("@vid", vid)
+
+
+        Try
+            cnx.Open()
+            Dim resultado As String = cmd.ExecuteScalar()
+            If String.IsNullOrEmpty(resultado) Then respuesta = Nothing Else respuesta = resultado
+
+        Catch ex As Exception
+            Throw ex
+        Finally
+            cnx.Close()
+        End Try
+        Return respuesta
+    End Function
+
+    'Public Function buscaVisitas(ByVal url As String) As Integer
+    '    Dim respuesta = 0
+    '    Dim sentencia As String
+    '    Dim cnx As New SqlConnection With {
+    '       .ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings("oretubeConnectionString").ConnectionString
+    '}
+    '    sentencia = "select visitas from video where url=@url"
+    '    Dim cmd As New SqlCommand(sentencia, cnx)
+    '    cmd.Parameters.AddWithValue("@url", url)
+
+    '    Try
+    '        cnx.Open()
+    '        Dim resultado As String = cmd.ExecuteScalar()
+    '        If String.IsNullOrEmpty(resultado) Then respuesta = 0 Else respuesta = resultado
+
+    '    Catch ex As Exception
+    '        Throw ex
+    '    Finally
+    '        cnx.Close()
+    '    End Try
+    '    Return respuesta
+    'End Function
 
 End Class

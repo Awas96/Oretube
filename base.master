@@ -15,8 +15,9 @@
     <script src="/Scripts/popper.min.js"></script>
     <script src="/Scripts/header.js"></script>
     <script src="/Scripts/fa.js"></script>
+    <script src="/Scripts/button1.js"></script>
 
-    
+
 </head>
 <body>
     <form id="fVideo" runat="server">
@@ -27,11 +28,15 @@
                 <nav>
                     <ul>
                         <li>
-                            <a runat="server">Logueado como </a><a runat="server" id="TituloNombreUsuario">Usuario</a>
+                            <a runat="server"><i class="far fa-user"></i>Usuario: </a><a runat="server" id="TituloNombreUsuario">Usuario</a>
                         </li>
+                        <asp:ContentPlaceHolder ID="CPHMenu" runat="server">
+                        </asp:ContentPlaceHolder>
                         <li>
-                            <asp:LinkButton CssClass="text-center" runat="server" ID="BtnSalir" Text="Salir de la Aplicacion"></asp:LinkButton>
+                            <asp:LinkButton CssClass="text-center btn btn-outline-info" runat="server" ID="BtnSalir" Text=""><i class="fas fa-sign-out-alt"></i> Cerrar sesión </asp:LinkButton>
                         </li>
+
+
                     </ul>
                 </nav>
             </div>
@@ -45,28 +50,28 @@
                 </div>
             </div>
         </header>
-        
-            <main class="main">
-                <section>
-                    <article>
-                        <div class="Section1">
-                            <asp:ContentPlaceHolder ID="CPHContenido1" runat="server">
-                            </asp:ContentPlaceHolder>
-                            <div class="Section2">
-                                <asp:ContentPlaceHolder ID="CPHContenido2" runat="server">
-                                </asp:ContentPlaceHolder>
-                            </div>
-                        </div>
-                    </article>
-                </section>
-                <aside>
-                    <div class="aside1">
-                        <asp:ContentPlaceHolder ID="CPHAside1" runat="server">
+
+        <main class="main">
+            <section>
+                <article>
+                    <div class="Section1">
+                        <asp:ContentPlaceHolder ID="CPHContenido1" runat="server">
                         </asp:ContentPlaceHolder>
+                        <div class="Section2">
+                            <asp:ContentPlaceHolder ID="CPHContenido2" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
                     </div>
-                </aside>
-            </main>
-      
+                </article>
+            </section>
+            <aside>
+                <div class="aside1">
+                    <asp:ContentPlaceHolder ID="CPHAside1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </aside>
+        </main>
+
     </form>
 </body>
 </html>

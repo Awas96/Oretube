@@ -27,8 +27,23 @@ Partial Class MiImagen
         End Set
     End Property
 
-    Private Sub imVideo_Click(sender As Object, e As ImageClickEventArgs) Handles imVideo.Click
+    'Public Sub actualizaViews()
+    '    Dim code As New Codigo
+    '    Dim visitas = code.buscaVisitas(GetUrl)
+    '    visitas += 1
+    '    sqldsUpdateVideo.UpdateParameters.Item("url").DefaultValue = GetUrl
+    '    sqldsUpdateVideo.UpdateParameters.Item("visualizacion").DefaultValue = visitas
 
+    '    Try
+    '        sqldsUpdateVideo.Update()
+    '    Catch ex As Exception
+    '        Throw ex
+    '    End Try
+
+    'End Sub
+
+    Private Sub imVideo_Click(sender As Object, e As ImageClickEventArgs) Handles imVideo.Click
+        'actualizaViews()
     End Sub
 
     Public Function construirPath(Optional ByVal rol As String = "0") As String
